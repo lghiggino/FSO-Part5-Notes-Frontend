@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Footer = () => {
   const footerStyle = {
     color: 'green',
@@ -10,7 +8,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2021</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2022</em>
     </div>
   )
 }
