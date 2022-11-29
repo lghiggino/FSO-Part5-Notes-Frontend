@@ -1,23 +1,44 @@
 import axios from "axios";
+import jwt_decode from "jwt-decode";
+
 const baseUrl =
   process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
     ? "http://localhost:3001/api/notes"
     : "/api/notes";
 
-const getAll = () => {
-  const request = axios.get(baseUrl);
+let token = null;
+let id = null;
 
-  return request.then((response) => response.data);
+const setToken = (newToken) => {
+  token = `bearer ${newToken}`;
 };
 
-const create = (newObject) => {
-  const request = axios.post(baseUrl, newObject);
-  return request.then((response) => response.data);
+const setUserId = (newToken) => {
+  let decoded = jwt_decode(newToken);
+  console.log(decoded.id)
+  id = decoded.id;
 };
 
-const update = (id, newObject) => {
-  const request = axios.put(`${baseUrl}/${id}`, newObject);
-  return request.then((response) => response.data);
+const getAll = async () => {
+  const request = await axios.get(baseUrl);
+  return request.data;
 };
 
-export default { getAll, create, update };
+const create = async (newNote) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const request = await axios.post(baseUrl, { ...newNote, userId:id }, config);
+  return request.data;
+};
+
+const update = async (id, newNote) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const request = await axios.put(`${baseUrl}/${id}`, newNote, config);
+  return request.data;
+};
+
+const loginService = { getAll, create, update, setToken, setUserId };
+export default loginService;
