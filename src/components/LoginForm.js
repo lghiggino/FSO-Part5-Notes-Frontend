@@ -11,8 +11,11 @@ export const LoginForm = ({ setUser, setErrorMessage }) => {
 
     try {
       const user = await loginService.login({ username, password });
+
+      window.localStorage.setItem("loggedNoteappUser", JSON.stringify(user));
+
       noteService.setToken(user.token);
-      noteService.setUserId(user.token)
+      noteService.setUserId(user.token);
       setUser(user);
       setUsername("");
       setPassword("");
@@ -20,7 +23,7 @@ export const LoginForm = ({ setUser, setErrorMessage }) => {
       setErrorMessage("Wrong credentials");
       setTimeout(() => {
         setErrorMessage(null);
-      }, 5000);
+      }, 4000);
     }
   };
   return (
