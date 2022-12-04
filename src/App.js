@@ -15,6 +15,10 @@ const App = () => {
 
   const [user, setUser] = useState(null);
 
+  const [loginVisible, setLoginVisible] = useState(false);
+  const hideWhenVisible = { display: loginVisible ? "none" : "" };
+  const showWhenVisible = { display: loginVisible ? "" : "none" };
+
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
       setNotes(initialNotes);
@@ -31,8 +35,8 @@ const App = () => {
   }, []);
 
   const logout = () => {
-    window.localStorage.removeItem("loggedNoteappUser")
-    setUser(null)
+    window.localStorage.removeItem("loggedNoteappUser");
+    setUser(null);
   };
 
   const addNote = (event) => {
@@ -82,11 +86,24 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
+      <div style={hideWhenVisible}>
+        <button onClick={() => setLoginVisible(true)}>log in</button>
+      </div>
+
       {user === null ? (
-        <LoginForm setUser={setUser} setErrorMessage={setErrorMessage} />
+        <div style={showWhenVisible}>
+          <LoginForm setUser={setUser} setErrorMessage={setErrorMessage} />
+          <button onClick={() => setLoginVisible(false)}>cancel</button>
+        </div>
       ) : (
         <div>
-          <div style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
             <p>{user.name} logged-in</p>
             <button onClick={logout}>Logout</button>
           </div>
