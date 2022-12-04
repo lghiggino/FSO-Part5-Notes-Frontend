@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Note from "./components/Note";
 import Notification from "./components/Notification";
 import Footer from "./components/Footer";
+import Togglable from "./components/Togglable";
 import noteService from "./services/notes";
 import { LoginForm } from "./components/LoginForm";
 import { NoteForm } from "./components/NoteForm";
@@ -86,15 +87,10 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      <div style={hideWhenVisible}>
-        <button onClick={() => setLoginVisible(true)}>log in</button>
-      </div>
-
       {user === null ? (
-        <div style={showWhenVisible}>
+        <Togglable buttonLabel="login">
           <LoginForm setUser={setUser} setErrorMessage={setErrorMessage} />
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
-        </div>
+        </Togglable>
       ) : (
         <div>
           <div
@@ -108,19 +104,16 @@ const App = () => {
             <button onClick={logout}>Logout</button>
           </div>
 
-          <NoteForm
-            addNote={addNote}
-            newNote={newNote}
-            handleNoteChange={handleNoteChange}
-          />
+          <Togglable buttonLabel="create new note">
+            <NoteForm
+              onSubmit={addNote}
+              value={newNote}
+              handleNoteChange={handleNoteChange}
+            />
+          </Togglable>
         </div>
       )}
 
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? "important" : "all"}
-        </button>
-      </div>
       <ul>
         {notesToShow.map((note) => (
           <Note
@@ -130,6 +123,12 @@ const App = () => {
           />
         ))}
       </ul>
+
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? "important notes" : "all notes"}
+        </button>
+      </div>
 
       <Footer />
     </div>
