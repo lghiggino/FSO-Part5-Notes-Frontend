@@ -10,15 +10,11 @@ import { NoteForm } from "./components/NoteForm";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("");
+  // const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const [user, setUser] = useState(null);
-
-  const [loginVisible, setLoginVisible] = useState(false);
-  const hideWhenVisible = { display: loginVisible ? "none" : "" };
-  const showWhenVisible = { display: loginVisible ? "" : "none" };
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
@@ -40,23 +36,10 @@ const App = () => {
     setUser(null);
   };
 
-  const addNote = (event) => {
-    event.preventDefault();
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() > 0.5,
-      id: notes.length + 1,
-    };
-
+  const addNote = (noteObject) => {
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote));
-      setNewNote("");
     });
-  };
-
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value);
   };
 
   const toggleImportanceOf = (id) => {
@@ -105,11 +88,7 @@ const App = () => {
           </div>
 
           <Togglable buttonLabel="create new note">
-            <NoteForm
-              onSubmit={addNote}
-              value={newNote}
-              handleNoteChange={handleNoteChange}
-            />
+            <NoteForm createNote={addNote} />
           </Togglable>
         </div>
       )}
