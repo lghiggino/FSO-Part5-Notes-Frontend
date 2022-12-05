@@ -36,10 +36,16 @@ const App = () => {
     setUser(null);
   };
 
-  const addNote = (noteObject) => {
-    noteService.create(noteObject).then((returnedNote) => {
-      setNotes(notes.concat(returnedNote));
-    });
+  const addNote = async (noteObject) => {
+    try {
+      const createdNote = await noteService.create({
+        ...noteObject,
+        userId: noteService.setUserId(user.token),
+      });
+      setNotes(notes.concat(createdNote));
+    } catch (error) {
+      setErrorMessage("Unable to create a new note");
+    }
   };
 
   const toggleImportanceOf = (id) => {
