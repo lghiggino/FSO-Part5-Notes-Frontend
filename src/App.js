@@ -7,6 +7,7 @@ import Togglable from "./components/Togglable";
 import noteService from "./services/notes";
 import { LoginForm } from "./components/LoginForm";
 import { NoteForm } from "./components/NoteForm";
+import TestPage from "./pages/testPage";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -43,7 +44,7 @@ const App = () => {
         userId: noteService.setUserId(user.token),
       });
       setNotes(notes.concat(createdNote));
-      noteFormRef.current.toggleVisibility()
+      noteFormRef.current.toggleVisibility();
     } catch (error) {
       setErrorMessage("Unable to create a new note");
     }
@@ -118,9 +119,12 @@ const App = () => {
         </button>
       </div>
 
+      <Togglable buttonLabel={"showTestPage"}>
+        <TestPage />
+      </Togglable>
+
       <Footer />
     </div>
   );
 };
-
 export default App;
