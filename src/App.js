@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Note from "./components/Note";
 import Notification from "./components/Notification";
@@ -43,6 +43,7 @@ const App = () => {
         userId: noteService.setUserId(user.token),
       });
       setNotes(notes.concat(createdNote));
+      noteFormRef.current.toggleVisibility()
     } catch (error) {
       setErrorMessage("Unable to create a new note");
     }
@@ -67,6 +68,8 @@ const App = () => {
         setNotes(notes.filter((n) => n.id !== id));
       });
   };
+
+  const noteFormRef = useRef();
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -93,7 +96,7 @@ const App = () => {
             <button onClick={logout}>Logout</button>
           </div>
 
-          <Togglable buttonLabel="create new note">
+          <Togglable buttonLabel="create new note" ref={noteFormRef}>
             <NoteForm createNote={addNote} />
           </Togglable>
         </div>
