@@ -8,6 +8,7 @@ import noteService from "./services/notes";
 import { LoginForm } from "./components/LoginForm";
 import { NoteForm } from "./components/NoteForm";
 import TestPage from "./pages/testPage";
+import LogButtonClicks from "./pages/counterPage";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -119,8 +120,12 @@ const App = () => {
         </button>
       </div>
 
-      <Togglable buttonLabel={"showTestPage"}>
+      <Togglable buttonLabel={"show TestPage"}>
         <TestPage />
+      </Togglable>
+
+      <Togglable buttonLabel={"show CounterPage"}>
+        <LogButtonClicks />
       </Togglable>
 
       <Footer />
