@@ -1,8 +1,9 @@
 import { useState } from "react";
 import loginService from "../services/login";
 import noteService from "../services/notes";
+import PropTypes from "prop-types";
 
-export const LoginForm = ({ setUser, setErrorMessage }) => {
+const LoginForm = ({ setUser, setErrorMessage }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -54,3 +55,10 @@ export const LoginForm = ({ setUser, setErrorMessage }) => {
     </>
   );
 };
+
+LoginForm.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
+};
+
+export default LoginForm;
