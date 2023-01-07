@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { PropTypes } from "prop-types";
-import Note from "./Note";
 
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState("");

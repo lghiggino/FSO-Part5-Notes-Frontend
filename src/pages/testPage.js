@@ -8,7 +8,7 @@ export default function TestPage() {
   }
 
   function handleKeyPress() {
-    console.log(textInput)
+    console.log(textInput);
   }
 
   function logInputResult() {

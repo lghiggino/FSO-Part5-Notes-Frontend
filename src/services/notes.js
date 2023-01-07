@@ -15,7 +15,7 @@ const setToken = (newToken) => {
 
 const setUserId = (newToken) => {
   let decoded = jwt_decode(newToken);
-  console.log(decoded.id)
+  console.log(decoded.id);
   id = decoded.id;
 };
 
@@ -28,7 +28,7 @@ const create = async (newNote) => {
   const config = {
     headers: { Authorization: token },
   };
-  const request = await axios.post(baseUrl, { ...newNote, userId:id }, config);
+  const request = await axios.post(baseUrl, { ...newNote, userId: id }, config);
   return request.data;
 };
 
