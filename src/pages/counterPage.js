@@ -4,19 +4,18 @@ export default function LogButtonClicks() {
 
   const handleIncrease = () => {
     countRef.current++;
-    console.log(`Clicked ${countRef.current} times`)
+    console.log(`Count now is: ${countRef.current}`);
   };
 
   const handleDecrease = () => {
     countRef.current--;
-    console.log(`Clicked ${countRef.current} times`)
+    console.log(`Count now is: ${countRef.current}`);
   };
 
-  console.log("I rendered!");
   return (
     <>
-      <button onClick={handleIncrease}>Click me to add</button>;
-      <button onClick={handleDecrease}>Click me to subtract</button>;
+      <button onClick={handleIncrease}>Click me to add</button>
+      <button onClick={handleDecrease}>Click me to subtract</button>
     </>
   );
 }
