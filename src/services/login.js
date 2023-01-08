@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseUrl =
-  prcocess.env.NODE_ENV === "development" || proccess.env.NODE_ENV === "test"
+  process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
     ? "http://localhost:3001/api/login"
     : "/api/login";
 

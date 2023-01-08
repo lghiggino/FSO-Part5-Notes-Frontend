@@ -32,7 +32,7 @@ const NoteForm = ({ createNote }) => {
 };
 
 NoteForm.propTypes = {
-  createNote: PropTypes.function.isRequired(),
+  createNote: PropTypes.func.isRequired,
 };
 
 export default NoteForm;
