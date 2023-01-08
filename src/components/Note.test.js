@@ -3,21 +3,41 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, screen } from "@testing-library/react";
 import Note from "./Note";
 
-test("Renders content", () => {
-  const note = {
-    content: "Component testing is done with react-testing-library",
-    important: true,
-  };
+describe("Basic Tests ", () => {
+  it("Renders content - get content via screen and getByText", () => {
+    const note = {
+      content: "Component testing is done with react-testing-library",
+      important: false,
+    };
 
-  const { container } = render(<Note note={note} />);
+    render(<Note note={note} />);
 
-  const element = screen.getByText(
-    "Component testing is done with react-testing-library"
-  );
-  expect(element).toBeDefined();
+    // screen.debug();
 
-  const div = container.querySelector(".note");
-  expect(div).toHaveTextContent(
-    "Component testing is done with react-testing-library"
-  );
+    const element = screen.getByText(
+      "Component testing is done with react-testing-library"
+    );
+
+    // screen.debug(element);
+
+    expect(element).toBeDefined();
+  });
+
+  it("Renders content - get content via { container } and query selector", () => {
+    const note = {
+      content: "Component testing is done with react-testing-library",
+      important: true,
+    };
+
+    const { container } = render(<Note note={note} />);
+
+    const div = container.querySelector(".note");
+    expect(div).toHaveTextContent(
+      "Component testing is done with react-testing-library"
+    );
+
+    const button = container.querySelector(".note > button");
+    expect(button).toHaveTextContent("make not important");
+
+  });
 });
