@@ -4,6 +4,10 @@ import { PropTypes } from "prop-types";
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState("");
 
+  const handleNoteChange = (event) => {
+    setNewNote(event.target.value);
+  };
+
   const addNote = (event) => {
     event.preventDefault();
     createNote({
@@ -13,10 +17,6 @@ const NoteForm = ({ createNote }) => {
     });
 
     setNewNote("");
-  };
-
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value);
   };
 
   return (
