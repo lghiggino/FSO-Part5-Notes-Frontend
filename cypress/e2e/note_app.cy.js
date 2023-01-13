@@ -12,5 +12,10 @@ describe("Note app", function () {
 
   it("login form can be opened", function () {
     cy.contains("login").click();
+    cy.get("#input-username").type("mluukkai");
+    cy.get("#input-password").type("salainen");
+    cy.get("#button-login").click();
+
+    cy.contains("Matti Luukkainen logged in");
   });
 });
