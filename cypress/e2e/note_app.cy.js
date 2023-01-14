@@ -16,6 +16,26 @@ describe("Note app", function () {
     cy.get("#input-password").type("salainen");
     cy.get("#button-login").click();
 
-    cy.contains("Matti Luukkainen logged in");
+    cy.contains("Matti Luukkaineno logged-in");
+  });
+
+  localStorage.removeItem("loggedNoteappUser");
+
+  describe("when logged in", function () {
+    beforeEach(function () {
+      cy.contains("login").click();
+      cy.get("#input-username").type("mluukkai");
+      cy.get("#input-password").type("salainen");
+      cy.get("#button-login").click();
+
+      cy.contains("Matti Luukkaineno logged-in");
+    });
+
+    it("a new note can be created", function () {
+      cy.contains("new note").click();
+      cy.get("#input-note").type("a note created by cypress");
+      cy.contains("save").click();
+      cy.contains("a note created by cypress");
+    });
   });
 });
