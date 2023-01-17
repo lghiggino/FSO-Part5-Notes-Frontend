@@ -17,7 +17,7 @@ describe("Note app", function () {
     );
   });
 
-  it("login form can be opened", function () {
+  it("user can login", function () {
     cy.contains("login").click();
     cy.get("#input-username").type("mluukkai");
     cy.get("#input-password").type("salainen");
@@ -43,6 +43,20 @@ describe("Note app", function () {
       cy.get("#input-note").type("a note created by cypress");
       cy.contains("save").click();
       cy.contains("a note created by cypress");
+    });
+
+    describe("and a note exists", function () {
+      beforeEach(function () {
+        cy.contains("new note").click();
+        cy.get("#input-note").type("another note cypress");
+        cy.contains("save").click();
+      });
+
+      it("it can be made important", function () {
+        cy.contains("another note cypress").contains("make important").click();
+
+        cy.contains("another note cypress").contains("make not important");
+      });
     });
   });
 });
