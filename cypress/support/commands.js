@@ -24,6 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+// import noteService from "./services/notes";
+const noteService = require("../../src/services/notes");
+
 Cypress.Commands.add("login", ({ username, password }) => {
   cy.request("POST", "http://localhost:3001/api/login", {
     username,
@@ -35,10 +38,12 @@ Cypress.Commands.add("login", ({ username, password }) => {
 });
 
 Cypress.Commands.add("createNote", ({ content, important }) => {
+  const user = localStorage.getItem("loggedNoteappUser");
+  const userId = noteService.setUserId(user.token);
   cy.request({
     url: "http://localhost:3001/api/notes",
     method: "POST",
-    body: { content, important },
+    body: { content, important, userId },
     headers: {
       Authorization: `bearer ${
         JSON.parse(localStorage.getItem("loggedNoteappUser")).token

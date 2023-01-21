@@ -21,7 +21,8 @@
     "copyInto": "cp -r build ../../FSO-Part3-Notes",
     "deploy": "npm run build && npm run copyInto",
     "eslint": "eslint .",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "start:cypress": "npm run start & npm run cypress:open"
   },
   "eslintConfig": {
     "extends": [
