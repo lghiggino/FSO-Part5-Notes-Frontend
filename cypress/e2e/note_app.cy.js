@@ -40,24 +40,36 @@ describe("Note app", function () {
 
     describe("and a note exists", function () {
       beforeEach(function () {
-        cy.createNote({
-          content: "another note cypress",
-          important: false,
-        });
+        cy.contains("new note").click();
+        cy.get("#input-note").type("a note created by cypress");
+        cy.contains("save").click();
+        cy.contains("a note created by cypress");
       });
 
       it("it can be made important", function () {
-        cy.contains("another note cypress").contains("make important").click();
+        cy.contains("a note created by cypress").contains("make important").click();
 
-        cy.contains("another note cypress").contains("make not important");
+        cy.contains("a note created by cypress").contains("make not important");
       });
     });
 
     describe("and several notes exist", function () {
       beforeEach(function () {
-        cy.createNote({ content: "first note", important: false });
-        cy.createNote({ content: "second note", important: false });
-        cy.createNote({ content: "third note", important: false });
+        cy.contains("new note").click();
+        cy.get("#input-note").type("first note");
+        cy.contains("save").click();
+
+        cy.contains("new note").click();
+        cy.get("#input-note").type("second note");
+        cy.contains("save").click();
+
+        cy.contains("new note").click();
+        cy.get("#input-note").type("third note");
+        cy.contains("save").click();
+        // cy.login({ username: "mluukkai", password: "salainen" });
+        // cy.createNote({ content: "first note", important: false });
+        // cy.createNote({ content: "second note", important: false });
+        // cy.createNote({ content: "third note", important: false });
       });
 
       it("one of those can be made important", function () {

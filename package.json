@@ -22,7 +22,7 @@
     "deploy": "npm run build && npm run copyInto",
     "eslint": "eslint .",
     "cypress:open": "cypress open",
-    "start:cypress": "npm run start & npm run cypress:open"
+    "start:with:cypress": "npm run start & npm run cypress:open"
   },
   "eslintConfig": {
     "extends": [
