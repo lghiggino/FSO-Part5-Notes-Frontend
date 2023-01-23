@@ -38,8 +38,11 @@ Cypress.Commands.add("login", ({ username, password }) => {
 });
 
 Cypress.Commands.add("createNote", ({ content, important }) => {
-  const user = localStorage.getItem("loggedNoteappUser");
+  const loggedUserJSON = window.localStorage.getItem("loggedNoteappUser");
+  const user = JSON.parse(loggedUserJSON);
+  noteService.setToken(user.token);
   const userId = noteService.setUserId(user.token);
+
   cy.request({
     url: "http://localhost:3001/api/notes",
     method: "POST",

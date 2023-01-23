@@ -26,7 +26,7 @@ describe("Note app", function () {
     cy.contains("Matti Luukkainen logged-in");
   });
 
-  describe("when logged in", function () {
+  describe.only("when logged in", function () {
     beforeEach(function () {
       cy.login({ username: "mluukkai", password: "salainen" });
     });
@@ -55,21 +55,21 @@ describe("Note app", function () {
 
     describe("and several notes exist", function () {
       beforeEach(function () {
-        cy.contains("new note").click();
-        cy.get("#input-note").type("first note");
-        cy.contains("save").click();
+        // cy.contains("new note").click();
+        // cy.get("#input-note").type("first note");
+        // cy.contains("save").click();
 
-        cy.contains("new note").click();
-        cy.get("#input-note").type("second note");
-        cy.contains("save").click();
+        // cy.contains("new note").click();
+        // cy.get("#input-note").type("second note");
+        // cy.contains("save").click();
 
-        cy.contains("new note").click();
-        cy.get("#input-note").type("third note");
-        cy.contains("save").click();
-        // cy.login({ username: "mluukkai", password: "salainen" });
-        // cy.createNote({ content: "first note", important: false });
-        // cy.createNote({ content: "second note", important: false });
-        // cy.createNote({ content: "third note", important: false });
+        // cy.contains("new note").click();
+        // cy.get("#input-note").type("third note");
+        // cy.contains("save").click();
+
+        cy.createNote({ content: "first note", important: false });
+        cy.createNote({ content: "second note", important: false });
+        cy.createNote({ content: "third note", important: false });
       });
 
       it("one of those can be made important", function () {
