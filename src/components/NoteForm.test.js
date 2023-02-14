@@ -18,7 +18,6 @@ describe("<NoteForm />", () => {
   it("should update the parent state and call onSubmit", async () => {
     const input = container.querySelector("form > input");
 
-    // const input = screen.getByRole('textbox')
     // const inputs = screen.getAllByRole("textbox");
     // await user.type(inputs[0], "testing a form...");
     // const input = screen.getByPlaceholderText('write here note content')
