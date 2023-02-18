@@ -7,7 +7,7 @@ describe("Note app", function () {
       password: "salainen",
     };
     cy.request("POST", "http://localhost:3001/api/users/", user);
-    cy.visit("http://localhost:3000");
+    cy.visit("http://localhost:3002");
   });
 
   it("front page can be opened", function () {
