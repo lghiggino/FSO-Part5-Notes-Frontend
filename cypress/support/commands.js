@@ -28,12 +28,12 @@
 const noteService = require("../../src/services/notes");
 
 Cypress.Commands.add("login", ({ username, password }) => {
-  cy.request("POST", "http://localhost:3001/api/login", {
+  cy.request("POST", `${Cypress.env("BACKEND")}/api/login`, {
     username,
     password,
   }).then(({ body }) => {
     localStorage.setItem("loggedNoteappUser", JSON.stringify(body));
-    cy.visit("http://localhost:3002");
+    cy.visit("");
   });
 });
 
@@ -44,7 +44,7 @@ Cypress.Commands.add("createNote", ({ content, important }) => {
   const userId = noteService.setUserId(user.token);
 
   cy.request({
-    url: "http://localhost:3001/api/notes",
+    url: `${Cypress.env("BACKEND")}/api/notes`,
     method: "POST",
     body: { content, important, userId },
     headers: {
@@ -54,5 +54,5 @@ Cypress.Commands.add("createNote", ({ content, important }) => {
     },
   });
 
-  cy.visit("http://localhost:3002");
+  cy.visit("");
 });
