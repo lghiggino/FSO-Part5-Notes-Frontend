@@ -28,7 +28,7 @@
 const noteService = require("../../src/services/notes");
 
 Cypress.Commands.add("login", ({ username, password }) => {
-  cy.request("POST", `${Cypress.env("BACKEND")}/api/login`, {
+  cy.request("POST", `${Cypress.env("BACKEND")}/login`, {
     username,
     password,
   }).then(({ body }) => {
@@ -44,7 +44,7 @@ Cypress.Commands.add("createNote", ({ content, important }) => {
   const userId = noteService.setUserId(user.token);
 
   cy.request({
-    url: `${Cypress.env("BACKEND")}/api/notes`,
+    url: `${Cypress.env("BACKEND")}/notes`,
     method: "POST",
     body: { content, important, userId },
     headers: {

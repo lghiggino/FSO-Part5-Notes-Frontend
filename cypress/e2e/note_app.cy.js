@@ -1,12 +1,12 @@
 describe("Note app", function () {
   beforeEach(function () {
-    cy.request("POST", `${Cypress.env("BACKEND")}/api/testing/reset`);
+    cy.request("POST", `${Cypress.env("BACKEND")}/testing/reset`);
     const user = {
       name: "Matti Luukkainen",
       username: "mluukkai",
       password: "salainen",
     };
-    cy.request("POST", `${Cypress.env("BACKEND")}/api/users/`, user);
+    cy.request("POST", `${Cypress.env("BACKEND")}/users/`, user);
     cy.visit("");
   });
 
@@ -55,21 +55,24 @@ describe("Note app", function () {
 
     describe("and several notes exist", function () {
       beforeEach(function () {
-        // cy.contains("new note").click();
-        // cy.get("#input-note").type("first note");
-        // cy.contains("save").click();
+        cy.contains("new note").click();
+        cy.get("#input-note").type("first note");
+        cy.contains("save").click();
 
-        // cy.contains("new note").click();
-        // cy.get("#input-note").type("second note");
-        // cy.contains("save").click();
+        cy.contains("new note").click();
+        cy.get("#input-note").type("second note");
+        cy.contains("save").click();
 
-        // cy.contains("new note").click();
-        // cy.get("#input-note").type("third note");
-        // cy.contains("save").click();
+        cy.contains("new note").click();
+        cy.get("#input-note").type("third note");
+        cy.contains("save").click();
 
-        cy.createNote({ content: "first note", important: false });
-        cy.createNote({ content: "second note", important: false });
-        cy.createNote({ content: "third note", important: false });
+        // cy.createNote({ content: "first note", important: false });
+        // cy.get("html").should("contain", "first note");
+        // cy.createNote({ content: "second note", important: false });
+        // cy.get("html").should("contain", "second note");
+        // cy.createNote({ content: "third note", important: false });
+        // cy.get("html").should("contain", "third note");
       });
 
       it("one of those can be made important", function () {
